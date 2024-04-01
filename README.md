@@ -1,1 +1,1 @@
-ci-cd of Student-Registry-App witch Jenkinsfile
+ci-cd of Student-Registry-App witch Jenkins-MULTI-STAGE-PIPELINE
