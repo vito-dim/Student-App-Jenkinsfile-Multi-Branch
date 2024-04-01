@@ -15,12 +15,20 @@ pipeline {
         }
 
         stage('Integration tests') {
+            when {
+                not {
+                    branch 'main'
+                }
+            }
             steps {
                 sh 'npm run test'
             }
         }
 
         stage('Build images') {
+            when {
+                branch 'main'
+            }
             steps {
                 sh 'docker build -t vidraxmax/vidra-app-test:$BUILD_NUMBER .'
                 sh 'docker tag vidraxmax/vidra-app-test:$BUILD_NUMBER vidraxmax/vidra-app-test:latest'
@@ -28,6 +36,9 @@ pipeline {
         }
 
         stage('Push images to repo') {
+            when {
+                branch 'main'
+            }
             steps {
                 script {
                       // Prompt for input approval
@@ -42,6 +53,9 @@ pipeline {
         }
 
         stage('Deploy in render using curl') {
+            when {
+                branch 'main'
+            }
             steps {
                 script {
                       // Prompt for input approval
